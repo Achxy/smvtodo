@@ -48,7 +48,8 @@ def get_int_input(prompt):
         user_input = input(prompt)
         if not user_input.isnumeric():
             print("Please enter an valid integer")
-        return int(user_input)
+        else:
+            return int(user_input)
 
 
 def get_confirmation(prompt):
@@ -67,10 +68,9 @@ def get_confirmation(prompt):
         user_input = input(prompt).lower()
         if user_input in ["y", "yes"]:
             return True
-        elif user_input in ["n", "no"]:
+        if user_input in ["n", "no"]:
             return False
-        else:
-            print("Please enter 'yes' or 'no', or abbreviate it as 'y' or 'n'")
+        print("Please enter 'yes' or 'no', or abbreviate it as 'y' or 'n'")
 
 
 def show_help_page(cursor=None):
