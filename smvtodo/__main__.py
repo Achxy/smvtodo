@@ -1,4 +1,4 @@
-from smvtodo.core import run_app
+from core import run_app
 
 
 if __name__ == "__main__":

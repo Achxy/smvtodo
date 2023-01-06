@@ -123,3 +123,7 @@ def run_app():
     connection = get_connection()
     cursor = connection.cursor()
     start_application(cursor)
+
+
+if __name__ == "__main__":
+    run_app()
