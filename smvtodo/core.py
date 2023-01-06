@@ -9,12 +9,23 @@ import sys
 
 
 def get_connection():
+    """
+    This function is used to return a connection object
+    and then print a success message
+
+    Returns:
+        Connection: Connection object for the database
+    """
     con = sqlite3.connect("todo-database.db")
     print("Connection has been created", end="\n\n")
     return con
 
 
-def create_table_if_not_exists(cursor: sqlite3.Cursor):
+def create_table_if_not_exists(cursor):
+    """
+    This is function is used to create the todo_table if it does
+    not exist already, this is necessary if the program is running for the first time.
+    """
     query = """CREATE TABLE IF NOT EXISTS todo_table
                 (   id          INTEGER PRIMARY KEY AUTOINCREMENT,
                     description UNIQUE
@@ -24,6 +35,15 @@ def create_table_if_not_exists(cursor: sqlite3.Cursor):
 
 
 def get_int_input(prompt):
+    """
+    This function is used to get a validated integer input from the user
+
+    Args:
+        prompt (str): a string prompt that should be displayed to the user
+
+    Returns:
+        int: integer output that was given by the user
+    """
     while True:
         user_input = input(prompt)
         if not user_input.isnumeric():
@@ -32,6 +52,17 @@ def get_int_input(prompt):
 
 
 def get_confirmation(prompt):
+    """
+    Get confirmation from the user about a action
+    this is done by asking the user yes or no question and then returning a
+    corresponding boolean value, the inputs are validated
+
+    Args:
+        prompt (str): a string prompt that should be displayed to the user
+
+    Returns:
+        bool: True for yes, False for no
+    """
     while True:
         user_input = input(prompt).lower()
         if user_input in ["y", "yes"]:
@@ -43,6 +74,11 @@ def get_confirmation(prompt):
 
 
 def show_help_page(cursor=None):
+    """
+    Display help message for the user for an friendly interface
+    providing cursor for this function is optional, process_choice may invoke
+    this function with cursor as a positional argument
+    """
     info = """
     1 - INSERT NEW RECORD
     2 - DELETE RECORD
@@ -116,6 +152,13 @@ def process_choice(choice, cursor):
 
 
 def start_application(cursor):
+    """
+    Starts the application by creating tables and manual
+    then proceeds to continously process commands
+
+    Args:
+        cursor (Cursor): Cursor object that has been initialized
+    """
     create_table_if_not_exists(cursor)
     show_help_page(cursor)
     while True:
@@ -126,6 +169,10 @@ def start_application(cursor):
 
 
 def run_app():
+    """
+    Main entry point for the program, runs necessary prerequisites and
+    starts the application
+    """
     connection = get_connection()
     cursor = connection.cursor()
     start_application(cursor)
