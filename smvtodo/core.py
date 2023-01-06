@@ -123,6 +123,3 @@ def run_app():
     connection = get_connection()
     cursor = connection.cursor()
     start_application(cursor)
-
-
-run_app()
