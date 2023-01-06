@@ -17,11 +17,6 @@ def create_table_if_not_exists(cursor: sqlite3.Cursor):
     cursor.execute(query)
 
 
-def get_todos(cursor: sqlite3.Cursor):
-    query = "SELECT priority, description FROM todo_table"
-    return cursor.execute(query).fetchall()
-
-
 def get_int_input(prompt):
     while True:
         user_input = input(prompt)
@@ -60,13 +55,13 @@ def insert_new_record(cursor):
     print("Task has been sucessfully inserted")
 
 
-def delete_existing_record(cursor: sqlite3.Cursor):
+def delete_existing_record(cursor):
     record_id = get_int_input("Enter the record identity that should be deleted >")
     cursor.execute("DELETE FROM todo_table WHERE id = ?;", (record_id,))
     print("Task has been successfully deleted")
 
 
-def modify_existing_record(cursor: sqlite3.Cursor):
+def modify_existing_record(cursor):
     record_id = get_int_input("Enter the record identity that should be deleted >")
     task = input("Enter the task that should be done >")
     query = """
@@ -77,13 +72,13 @@ def modify_existing_record(cursor: sqlite3.Cursor):
     cursor.execute(query, (task, record_id))
 
 
-def display_all_todo_tasks(cursor: sqlite3.Cursor):
+def display_all_todo_tasks(cursor):
     query = "SELECT id, description FROM todo_table;"
     records = cursor.execute(query).fetchall()
     print(records)
 
 
-def clear_table(cursor: sqlite3.Cursor):
+def clear_table(cursor):
     prompt = "Are you sure you want to delete all the records? [yes / no] >"
     if get_confirmation(prompt):
         cursor.execute("DROP TABLE todo_table;")
@@ -91,7 +86,7 @@ def clear_table(cursor: sqlite3.Cursor):
         print("All the values in the table have been reset")
 
 
-def exit_app(cursor: sqlite3.Cursor):
+def exit_app(cursor):
     cursor.close()
     print("Thank you for using our app")
     print("Made by Achyuth Jayadevan and Adharve N.A")
