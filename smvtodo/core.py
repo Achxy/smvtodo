@@ -121,6 +121,7 @@ def start_application(cursor):
         choice = get_int_input("Enter your choice >")
         process_choice(choice, cursor)
         cursor.connection.commit()
+        print()
 
 
 def run_app():
