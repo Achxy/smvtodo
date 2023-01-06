@@ -1,3 +1,12 @@
+# smvtodo is a project for managing productivity todo-lists in the
+# terminal using SQL and Python
+# Copyright (C) 2023-present Achyuth Jayadevan
+# Copyright (C) 2023-present Adharve N.A
+
+# This file is automatically added by github to prevent
+# common local symbols to be added to version control for tracking
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -127,3 +136,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# TODO database
+todo-database.db
