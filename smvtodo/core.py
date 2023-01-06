@@ -92,18 +92,27 @@ def show_help_page(cursor=None):
 
 
 def insert_new_record(cursor):
+    """
+    Insert new records into the database
+    """
     task = input("Enter the task that should be done >")
     cursor.execute("INSERT INTO todo_table (description) VALUES (?);", (task,))
     print("Task has been sucessfully inserted")
 
 
 def delete_existing_record(cursor):
+    """
+    Delete an existing record in the database by referencing it's ID
+    """
     record_id = get_int_input("Enter the record identity that should be deleted >")
     cursor.execute("DELETE FROM todo_table WHERE id = ?;", (record_id,))
     print("Task has been successfully deleted")
 
 
 def modify_existing_record(cursor):
+    """
+    Modify an existing record in the database by referencing it's ID
+    """
     record_id = get_int_input("Enter the record identity that should be deleted >")
     task = input("Enter the task that should be done >")
     query = """
@@ -115,12 +124,18 @@ def modify_existing_record(cursor):
 
 
 def display_all_todo_tasks(cursor):
+    """
+    Display all the todos that has been registered in the database
+    """
     query = "SELECT id, description FROM todo_table;"
     records = cursor.execute(query).fetchall()
     print(records)
 
 
 def clear_table(cursor):
+    """
+    Clear the database table and create a new tabe
+    """
     prompt = "Are you sure you want to delete all the records? [yes / no] >"
     if get_confirmation(prompt):
         cursor.execute("DROP TABLE todo_table;")
@@ -129,6 +144,9 @@ def clear_table(cursor):
 
 
 def exit_app(cursor):
+    """
+    Exit the app and display credits
+    """
     cursor.close()
     print("Thank you for using our app")
     print("Made by Achyuth Jayadevan and Adharve N.A")
@@ -136,6 +154,15 @@ def exit_app(cursor):
 
 
 def process_choice(choice, cursor):
+    """
+    Processes the choice the user has entered
+    this is done by creating a mapping between the choices and the corresponding function
+    and then calling the function with the cursor object
+
+    Args:
+        choice (int): the choice the user has made
+        cursor (Cursor): the cursor object to execute queries
+    """
     if choice not in range(1, 8):
         print("choice must be within ranges of 1 to 7 inclusive")
     choices = {
